@@ -9,7 +9,7 @@ class HomeScreen extends StatefulWidget {
   final VoidCallback toggleTheme;
   final bool isDarkMode;
 
-  HomeScreen({required this.toggleTheme, required this.isDarkMode});
+  const HomeScreen({super.key, required this.toggleTheme, required this.isDarkMode});
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -36,16 +36,16 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Toko Buku Online',
           style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.blueAccent),
+        iconTheme: const IconThemeData(color: Colors.blueAccent),
         actions: [
           IconButton(
-            icon: Icon(Icons.brightness_6, color: Colors.blueAccent),
+            icon: const Icon(Icons.brightness_6, color: Colors.blueAccent),
             onPressed: widget.toggleTheme,
           ),
         ],

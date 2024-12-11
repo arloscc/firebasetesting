@@ -7,22 +7,22 @@ class LoginScreen extends StatelessWidget {
   final VoidCallback toggleTheme;
   final bool isDarkMode;
 
-  LoginScreen({required this.toggleTheme, required this.isDarkMode});
+  LoginScreen({super.key, required this.toggleTheme, required this.isDarkMode});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Toko Buku Online',
           style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.blueAccent),
+        iconTheme: const IconThemeData(color: Colors.blueAccent),
         actions: [
           IconButton(
-            icon: Icon(Icons.brightness_6, color: Colors.blueAccent),
+            icon: const Icon(Icons.brightness_6, color: Colors.blueAccent),
             onPressed: toggleTheme,
           ),
         ],
@@ -40,16 +40,16 @@ class LoginScreen extends StatelessWidget {
             } else {
               // Tampilkan pesan error jika login gagal
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text('Login gagal. Silakan coba lagi.')),
+                const SnackBar(content: Text('Login gagal. Silakan coba lagi.')),
               );
             }
           },
+          style: ElevatedButton.styleFrom(
+            padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 8),
+          ),
           child: Text(
             'Login with Google',
             style: TextStyle(fontWeight: FontWeight.bold, fontFamily: 'Poppins', color: Colors.blueAccent),
-          ),
-          style: ElevatedButton.styleFrom(
-            padding: EdgeInsets.symmetric(horizontal: 26, vertical: 8),
           ),
         ),
       ),

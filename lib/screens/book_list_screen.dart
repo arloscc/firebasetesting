@@ -7,7 +7,7 @@ class manga extends StatelessWidget {
   final bool isDarkMode;
   final VoidCallback toggleTheme;
 
-  manga({required this.isDarkMode, required this.toggleTheme});
+  manga({super.key, required this.isDarkMode, required this.toggleTheme});
 
   final List<Map<String, String>> books = [
     {'title': 'Naruto', 'author': 'Masashi Kishimoto'},
@@ -36,16 +36,16 @@ class manga extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Daftar Buku Manga',
           style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: isDarkMode ? Colors.grey[850] : Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.blueAccent),
+        iconTheme: const IconThemeData(color: Colors.blueAccent),
         actions: [
           IconButton(
-            icon: Icon(Icons.brightness_6, color: Colors.blueAccent),
+            icon: const Icon(Icons.brightness_6, color: Colors.blueAccent),
             onPressed: toggleTheme,
           ),
         ],
@@ -57,35 +57,35 @@ class manga extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: ListTile(
-              leading: Icon(Icons.book, color: Colors.blueAccent),
+              leading: const Icon(Icons.book, color: Colors.blueAccent),
               title: Text(
                 books[index]['title']!,
-                style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                style: const TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
               ),
               subtitle: Text(
                 books[index]['author']!,
-                style: TextStyle(fontFamily: 'Poppins'),
+                style: const TextStyle(fontFamily: 'Poppins'),
               ),
               onTap: () {
                 showDialog(
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text('Tambahkan ke Keranjang'),
-                      content: Text('Apakah Anda ingin menambahkan buku ini ke keranjang?'),
+                      title: const Text('Tambahkan ke Keranjang'),
+                      content: const Text('Apakah Anda ingin menambahkan buku ini ke keranjang?'),
                       actions: [
                         TextButton(
                           onPressed: () {
                             addToCart(books[index]);
                             Navigator.of(context).pop();
                           },
-                          child: Text('Ya'),
+                          child: const Text('Ya'),
                         ),
                         TextButton(
                           onPressed: () {
                             Navigator.of(context).pop();
                           },
-                          child: Text('Tidak'),
+                          child: const Text('Tidak'),
                         ),
                       ],
                     );
@@ -103,7 +103,7 @@ class manga extends StatelessWidget {
             MaterialPageRoute(builder: (context) => CartScreen(removeFromCart: removeFromCart, isDarkMode: isDarkMode, toggleTheme: toggleTheme)),
           );
         },
-        child: Icon(Icons.shopping_cart),
+        child: const Icon(Icons.shopping_cart),
       ),
     );
   }
@@ -114,22 +114,22 @@ class CartScreen extends StatelessWidget {
   final bool isDarkMode;
   final VoidCallback toggleTheme;
 
-  CartScreen({required this.removeFromCart, required this.isDarkMode, required this.toggleTheme});
+  const CartScreen({super.key, required this.removeFromCart, required this.isDarkMode, required this.toggleTheme});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Keranjang',
           style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
         ),
         backgroundColor: isDarkMode ? Colors.grey[850] : Colors.white,
         centerTitle: true,
-        iconTheme: IconThemeData(color: Colors.blueAccent),
+        iconTheme: const IconThemeData(color: Colors.blueAccent),
         actions: [
           IconButton(
-            icon: Icon(Icons.brightness_6, color: Colors.blueAccent),
+            icon: const Icon(Icons.brightness_6, color: Colors.blueAccent),
             onPressed: toggleTheme,
           ),
         ],
@@ -139,7 +139,7 @@ class CartScreen extends StatelessWidget {
         stream: FirebaseFirestore.instance.collection('cart').snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           }
 
           final cartItems = snapshot.data!.docs;
@@ -151,17 +151,17 @@ class CartScreen extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: ListTile(
-                  leading: Icon(Icons.book, color: Colors.blueAccent),
+                  leading: const Icon(Icons.book, color: Colors.blueAccent),
                   title: Text(
                     item['title'],
-                    style: TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
+                    style: const TextStyle(fontFamily: 'Poppins', fontWeight: FontWeight.bold),
                   ),
                   subtitle: Text(
                     item['author'],
-                    style: TextStyle(fontFamily: 'Poppins'),
+                    style: const TextStyle(fontFamily: 'Poppins'),
                   ),
                   trailing: IconButton(
-                    icon: Icon(Icons.delete, color: Colors.redAccent),
+                    icon: const Icon(Icons.delete, color: Colors.redAccent),
                     onPressed: () {
                       removeFromCart(item.id);
                     },
